@@ -2,8 +2,8 @@ import styled from 'styled-components';
 
 export const MenuContainer = styled.div`
     background: #000;
-    /* bottom: 0; */
-    /* position: fixed; */
+    bottom: 0;
+    position: fixed; 
     display: flex;    
     width: 100vw;
     height: 10vh;

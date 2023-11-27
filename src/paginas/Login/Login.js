@@ -1,6 +1,6 @@
 import { Fundo, CardLogin, Imagem, Estilização } from "./Login.jsx"
 import ImgLogo from '../../assets/SSP.png'
-import { Input, Button } from '@chakra-ui/react'
+import { Input, Button,Text } from '@chakra-ui/react'
 import { Link } from "react-router-dom"
 
 // ... (import statements remain unchanged)
@@ -13,9 +13,12 @@ function Login() {
                 <CardLogin>
 
                     <Estilização>
-                        <Input variant="Email" placeholder="Email" width="90%" height="35px" />
-                        <Input variant="Senha" type="password" placeholder="Senha" width="90%" height="35px" mt="10%" />
-                    </Estilização>
+                        <Text mb='3px'mr='50%'color='white' align='left'>Email</Text>
+                        <Input variant="Email" placeholder="Email" width="100%" height="40px" align='left'/>
+                        
+                        <Text mt='5px' mb='3px'mr='50%'color='white' align='left'>Senha</Text>
+                        <Input variant="Senha" type="password" placeholder="Senha" width="100%" height="40px" />
+                        </Estilização>
 
                     <Link to="/Cadastro">
 
@@ -37,7 +40,7 @@ function Login() {
                         marginLeft="25%"
                         borderRadius="10px"
                     >
-                        ENTRAR
+                        Entrar
                     </Button>
                 </Link>
             </Fundo>

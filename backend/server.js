@@ -54,22 +54,6 @@ app.post('/login', async (req, res) => {
   }
 });
 
-app.post('/alarme', async (req, res) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header('Access-Control-Allow-Methods', 'POST');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  
-  const resultadoConsulta = await rota.ativarAlarme(req.body);
-
-  if (resultadoConsulta.status === 200) {
-    return res.status(200).json({ mensagem: 'Alarme Ativado com sucesso' });
-  } else if (resultadoConsulta.status === 400) {
-    return res.status(400).json({ mensagem: 'Erro ao ativar alarme', erro: resultadoConsulta.erro });
-  } else {
-    return res.status(500).json({ mensagem: 'Erro interno', erro: resultadoConsulta.erro });
-  }
-});
-
 // Inicia o servidor
 app.listen(port, () => {
   console.log(`Servidor está rodando na porta ${port}`);

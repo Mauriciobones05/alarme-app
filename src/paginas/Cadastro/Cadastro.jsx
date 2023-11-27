@@ -13,26 +13,25 @@ export const Fundo = styled.div`
 `
 
 export const Card = styled.div`
-    
-    width: 70%;
-    height: 30vh;
+    width: 80%;
+    min-height: 40vh;
     padding: 1rem;
+    border-radius: 12px;
+    margin: 2px 22px 0;
     display: flex;
     flex-direction: column;
-    border-radius: 12px;
-    margin-left: 22px;
     align-items: center;
-    margin-top: -10%;
-    align-content: center;
+    justify-content: center;
 `
 
 
 export const Estilo = styled.div`
-    width: 100%;
-    margin-top: 10%;
-    align-items: center;
+    width: 120%;
+    margin-top: 50px;
+    margin-left:2%;
+    align-items: 70px;
+    height: 120%;
     justify-content: center;
-    height: 100%;
     
 `
 
@@ -43,3 +42,11 @@ export const BotaoVoltar = styled.div`
     margin-top: 10px;
     margin-left: 5px;
 `;
+
+export const Label = styled.div`
+    position: absolute;
+    left: 90px;
+    top:20px;
+    width:100%;
+    
+`

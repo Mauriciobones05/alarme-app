@@ -1,4 +1,4 @@
-import { Fundo, Estilo, Card, BotaoVoltar } from "./Cadastro.jsx";
+import { Fundo, Estilo, Card, BotaoVoltar, Label } from "./Cadastro.jsx";
 import { Input, Button, Text } from '@chakra-ui/react';
 import setaImg from '../../assets/seta.png';
 import {Link,useNavigate} from "react-router-dom";
@@ -60,24 +60,28 @@ function Cadastro() {
                     </Link>
                 </BotaoVoltar>
 
+                <Label>
+                   <Text mb='5px' mr='0%' color='white' fontSize='24px' fontWeight='bold' >Cadastrar Usuário</Text>
+                 </Label>
+
                 <Card justifyContent='space-between' align='center'>
                     <Estilo>
-                    <Text mb='8px'mr='50%'color='white' align='left'>Nome Completo:</Text>
+                    <Text mb='8px'mr='50%'color='white' align='left'>Nome Completo</Text>
                         <Input variant='Nome' placeholder='Nome'  value={nome} onChange={(e) => setNome(e.target.value)} />
 
-                    <Text mb='8px'mr='80%'color='white'mt='5' align='left'>Email:</Text>
+                    <Text mb='8px'mr='80%'color='white'mt='5' align='left'>Email</Text>
                         <Input variant='Email' placeholder='Email'  value={email} onChange={(e) => setEmail(e.target.value)} />
 
-                    <Text mb='8px'mr='80%'color='white'mt='5' align='left'>Senha:</Text>
+                    <Text mb='8px'mr='80%'color='white'mt='5' align='left'>Senha</Text>
                         <Input type='password' variant='Senha' placeholder='Senha'  value={senha} onChange={(e) => setSenha(e.target.value)} />
 
-                    <Text mb='8px'mr='45%'color='white'mt='5' align='left'>Confirmar Senha:</Text>
+                    <Text mb='8px'mr='45%'color='white'mt='5' align='left'>Confirmar Senha</Text>
                         <Input type='password' variant='Confirmar senha' placeholder='Confirmar senha' />
 
                     </Estilo>
                     
                 </Card>
-                <Button onClick={handleCadastro} background="#5FA1AF" mt='60'color='white' height='50px' width='65%' borderRadius='70px' fontFamily='arial'>Cadastrar</Button>
+                <Button onClick={handleCadastro} background="#5FA1AF" mt='50px'color='white' height='50px' width='65%' fontFamily='arial'>Cadastrar</Button>
 
                 {mostrarMensagem && <MsgAviso mensagem={mensagem} tipo={tipoMensagem} />}                
             </Fundo>

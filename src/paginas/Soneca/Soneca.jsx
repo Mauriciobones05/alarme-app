@@ -14,7 +14,8 @@ export const Titulo = styled.div`
     color: #fff;
     font-size: 20px; 
     font-family: 'Inika', sans-serif; 
-    font-weight: bold;    
+    font-weight: bold;  
+    margin-top: 20px  
 `;
 
 export const ContainerImg = styled.div`
@@ -32,7 +33,7 @@ export const ContainerImg = styled.div`
 export const Text = styled.div`
     align-self: flex-start;
     font-weight: 600; 
-    color: #D4F1F4; 
+    color: #D4F1F4;
 
 `;
 export const ImgFiguras = styled.img`
@@ -43,3 +44,10 @@ export const ImgFiguras = styled.img`
     display:flex;
 `;
 
+export const BotaoVoltar = styled.div`
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    margin-top: 10px;
+    margin-left: 5px;
+`;

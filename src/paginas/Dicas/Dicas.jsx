@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 export const Fundo = styled.div`
-    background: #0E7A8F;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+background: #0E7A8F;
+width: 100vw;
+min-height: 100vh;
+
+ display: flex;
+flex-direction: column;
+justify-content: space-between;
 `
 
 export const Img = styled.img`

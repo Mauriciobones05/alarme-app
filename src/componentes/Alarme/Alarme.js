@@ -1,10 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import SomAlarme from '/Dev/alarme-app/src/assets/som-alarme/alarme.mp3';
+import Modal from 'react-modal';
 
 const Alarme = () => {
   const [agora, setAgora] = useState(new Date());
   const [horaAlarme, setHoraAlarme] = useState(null);
   const [horaInput, setHoraInput] = useState('');
   const [alarmeAtivo, setAlarmeAtivo] = useState(false);
+  const [modalAberto, setModalAberto] = useState(false);
+
+  const [audio] = useState(new Audio(SomAlarme));
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -16,44 +21,31 @@ const Alarme = () => {
 
   useEffect(() => {
     if (horaAlarme && agora >= horaAlarme && !alarmeAtivo) {
-      alert('Alarme!!!');
+      // Exiba o modal quando o alarme é acionado
+      setModalAberto(true);
+      audio.play();
       setAlarmeAtivo(true); // Desativa o alarme após disparado
     }
-  }, [agora, horaAlarme, alarmeAtivo]);
+  }, [agora, horaAlarme, alarmeAtivo, audio]);
 
-  const definirAlarme = async() => {
+  const definirAlarme = () => {
     const novaHoraAlarme = new Date();
     const [horas, minutos] = horaInput.split(':');
     novaHoraAlarme.setHours(horas, minutos, 0);
     setHoraAlarme(novaHoraAlarme);
     setAlarmeAtivo(false); // Reativa o alarme
-    try {
-      const response = await fetch('http://localhost:3001/alarme', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ novaHoraAlarme }),
-      });
+    setHoraInput('');
+  };
 
-      if (response.status === 201) {
-         console.log('Alarme ativado');
-
-      } else if (response.status === 400) {
-        console.log('Erro ao ativar alarme');
-      } else {
-        console.log('Erro ao ativar alarme');
-      }
-    } catch (error) {
-
-    }
+  const fecharModal = () => {
+    setModalAberto(false);
   };
   return (
     <div>
       <p style={{ color: 'white', font: 'arial', textAlign: 'center' }}>
         Agora: {agora.toLocaleTimeString()}
       </p>
-  
+
       <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <input
           style={{
@@ -70,7 +62,7 @@ const Alarme = () => {
           value={horaInput}
           onChange={(e) => setHoraInput(e.target.value)}
         />
-  
+
         <button
           style={{
             width: '40vw',
@@ -78,23 +70,50 @@ const Alarme = () => {
             background: '#05445E',
             color: 'white',
             font: 'arial',
-            marginTop: '25px', 
+            marginTop: '25px',
             fontSize: 'larger',
-            borderRadius: '12px',            
+            borderRadius: '12px',
           }}
           onClick={definirAlarme}
         >
           Definir Alarme
         </button>
       </div>
-  
+
       {horaAlarme && (
-        <p style={{ color: 'white', font: 'arial',marginTop:'30px',textAlign: 'center' }}>
+        <p style={{ color: 'white', font: 'arial', marginTop: '30px', textAlign: 'center' }}>
           Alarme Ativado: {horaAlarme.toLocaleTimeString()}
         </p>
       )}
+
+      {/* Componente Modal */}
+      <Modal
+        isOpen={modalAberto}
+        onRequestClose={fecharModal}
+        style={{
+          overlay: {
+            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          },
+          content: {
+            width: '300px',
+            height: '150px',
+            margin: 'auto',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: '#05445E',
+            borderRadius: '10px',
+            fontSize: 'larger',
+            color:'white'
+          },
+        }}
+      >
+        <p>Alarme Acionado!</p>
+        <button onClick={fecharModal}>OK</button>
+      </Modal>
     </div>
-  );  
+  );
 };
 
 export default Alarme;

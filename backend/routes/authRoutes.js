@@ -45,16 +45,4 @@ async function verificaUsuario(usuario) {
     return { status: 500, mensagem: 'Erro interno', erro: error.message };
   }
 }
-
-async function ativarAlarme(alarme) {
-  try {
-      const insertQuery = "INSERT INTO alarmes (horario_alarme) VALUES (?)";
-      const values = [alarme.hora];
-      await db.query(insertQuery, values);
-      return { status: 201, mensagem: 'Alarme Ativado com sucesso' };
-  } catch (error) {
-    console.error('Erro na consulta SQL:', error);
-    return { status: 500, mensagem: 'Erro interno' };
-  }
-}
-module.exports = {insertUsuario,verificaUsuario,ativarAlarme};
+module.exports = {insertUsuario,verificaUsuario};

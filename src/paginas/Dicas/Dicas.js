@@ -29,15 +29,10 @@ function Dicas() {
                         </li>
 
                     </ol>
-
-
-
-
-
                 </Texto2>
 
 
-                <Footer />
+                <Footer/>
 
             </Fundo>
 

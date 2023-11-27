@@ -1,4 +1,4 @@
-import { Fundo, CardP, CardR, Img, Imagem, ImgPaisagem, Imagem2, Imagem3, Imagem4, ContainerPaisagens } from './Principal.jsx'
+import { Fundo, CardP, CardR, Img, Imagem, ImgPaisagem, Imagem2, Imagem3, Imagem4, ContainerPaisagens,BotaoVoltar } from './Principal.jsx'
 import Relogio from '../../assets/alarme.png'
 import Lua from '../../assets/lua.png'
 import Imagemfog from '../../assets/fogueira.jpeg'
@@ -7,7 +7,8 @@ import Praia from '../../assets/praia-som.webp'
 import Flore from '../../assets/flore.jpeg'
 import { Button } from '@chakra-ui/react'
 import { Stack } from '@chakra-ui/react'
-import Footer from '../../componentes/footer/Footer.js'
+import Footer from '../../componentes/footer/Footer.js';
+import setaImg from '../../assets/seta.png';
 
 
 import { Link } from "react-router-dom"
@@ -53,70 +54,20 @@ function Principal() {
         <>
 
             <Fundo>
+            <BotaoVoltar>
+                    <Link to='../Login'>
+                    <Button colorScheme='blue' variant='link'>
+                    <img src={setaImg} alt="Seta Voltar" style={{ marginRight: '5px', filter: 'invert(1)' }} />
+                    </Button>
+                    </Link>
+            </BotaoVoltar>
+
             <Alarme/>
-                {/* <div>
-                    <CardP>
-                        <Img src={Relogio} />
-                    </CardP>
-                    <CardP>
-                        <Imagem src={Lua} />
-                    </CardP>
-                </div> */}
-
-
-
-
                 <ContainerPaisagens>
                     {novoArrayPaisagem}
 
                 </ContainerPaisagens>
-
-
-
-
-
-
-                {/* <Link to="/Ondas">
-            <Stack direction='column' spacing={5} align='center' height='100px'>
- 
-             <Button colorScheme='whiteAlpha' variant='ghost' height='500px' marginLeft='200px'marginBottom='2px' color='white' borderRadius='30px'>
-                SOM DO MAR
-            </Button>
-            <Imagem2 src={Praia} left='100px' borderRadius='30px'/>
-            </Stack>
-            </Link>
-
-            
-            <Link to="/Chuva">
-            <Stack direction='column' spacing={5} align='center' height='100px'>
- 
-             <Button colorScheme='whiteAlpha' variant='ghost' marginLeft='-210px' height='500px' marginTop='2px' color='white' borderRadius='30vh'>
-                DORMIR COM CHUVA
-            </Button>
-           
-            <Imagem3 src={ImagemChu} left='100px'/>
-            </Stack>
-            </Link>
-
-
-            <Link to="/Floresta">
-            <Stack direction='column' spacing={5} align='center' height='100px'>
- 
-             <Button colorScheme='whiteAlpha' variant='ghost' marginLeft='200px' height='500px' marginTop='-10'marginBottom='-210px' color='white' borderRadius='30vh'>
-                SONS DA NATUREZA
-            </Button>
-           
-            <Imagem4 src={Flore}/>
-    
-            </Stack>
-            </Link> */}
-
-
-
                 <Footer />
-
-
-
             </Fundo>
         </>
     )
