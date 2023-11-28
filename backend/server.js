@@ -1,15 +1,30 @@
 const express = require('express');
+const mysql = require('mysql2/promise');
 const cors = require('cors');
 const app = express();
 const port = 3001;
-//const router = express.Router();
 const db = require('/Dev/alarme-app/backend/database');
-//const { verificarCredenciais } = require('/Dev/finalpp-main/backend/auth/authFunctions');
 const rota = require('/Dev/alarme-app/backend/routes/authRoutes');
+
+const db2 = mysql.createPool({
+  host: 'localhost',
+  user: 'bones',
+  password: 'bones1',
+  database: 'aplicativo',
+});
 
 // Configuração do middleware para permitir requisições JSON
 app.use(express.json());
 app.use(cors());
+
+
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.header('Access-Control-Allow-Methods', 'POST');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
 app.get('/usuarios', (req, res) => {
   db.query('SELECT * FROM usuarios ORDER BY id',(err,result) => {
@@ -21,10 +36,6 @@ app.get('/usuarios', (req, res) => {
 });
 
 app.post('/cadastro', async (req, res) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header('Access-Control-Allow-Methods', 'POST');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-
   const resultadoCadastro = await rota.insertUsuario(req.body);
 
   // Verifique o status retornado pela função insertUsuario
@@ -39,20 +50,22 @@ app.post('/cadastro', async (req, res) => {
 
 
 app.post('/login', async (req, res) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header('Access-Control-Allow-Methods', 'POST');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  
-  const resultadoConsulta = await rota.verificaUsuario(req.body);
+  const { email, senha } = req.body;
 
-  if (resultadoConsulta.status === 200) {
-    return res.status(200).json({ mensagem: 'Login realizado com sucesso' });
-  } else if (resultadoConsulta.status === 400) {
-    return res.status(400).json({ mensagem: 'Email e/ou senha inválidos', erro: resultadoConsulta.erro });
-  } else {
-    return res.status(500).json({ mensagem: 'Erro interno', erro: resultadoConsulta.erro });
+  try {
+    const [rows] = await db2.execute('SELECT * FROM usuarios WHERE email = ? AND senha = ?', [email, senha]);
+
+    if (rows.length > 0) {
+      res.status(200).json({ mensagem: 'Login realizado com sucesso' });
+    } else {
+      res.status(400).json({ mensagem: 'Email e/ou senha inválidos' });
+    }
+  } catch (error) {
+    console.error('Erro na consulta SQL:', error);
+    res.status(500).json({ mensagem: 'Erro interno' });
   }
 });
+
 
 // Inicia o servidor
 app.listen(port, () => {

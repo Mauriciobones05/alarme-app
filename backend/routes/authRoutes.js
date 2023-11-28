@@ -41,8 +41,9 @@ async function verificaUsuario(usuario) {
       return { status: 400, mensagem: 'Email e/ou Senha inválidos' };
     }
   } catch (error) {
-    console.error('Erro na consulta SQL:', error.message); // Adicione esta linha
+    console.error('Erro na consulta SQL:', error.message);
     return { status: 500, mensagem: 'Erro interno', erro: error.message };
   }
 }
+
 module.exports = {insertUsuario,verificaUsuario};
