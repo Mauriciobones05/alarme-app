@@ -26,7 +26,7 @@
   },
   "scripts": {
     "start": "concurrently \"npm run start:frontend\" \"npm run start:backend\"",
-    "start:frontend": "react-scripts start",
+    "start:frontend": "cd frontend &&react-scripts start",
     "start:backend": "cd backend && node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
